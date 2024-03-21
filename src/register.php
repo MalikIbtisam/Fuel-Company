@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+    <script src="../assets/js/script.js"></script>
     <title>Client Registration</title>
 </head>
 
@@ -14,7 +14,7 @@
     <div class="login-container">
         <h2>Client Registration</h2>
         <div id="error-message" class="error"></div>
-        <form id="registerForm" method="POST" action="profile.php" onsubmit="return validateLogin()">
+        <form id="registerForm" method="POST" action="profile.php" onsubmit="return validateRegister()">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
