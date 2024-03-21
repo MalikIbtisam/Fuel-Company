@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+    <script src="../assets/js/script.js"></script>
     <title>Login</title>
 </head>
 
@@ -17,18 +17,17 @@
         <form id="loginForm" method="POST" action="fuel-quote-form.php" onsubmit="return validateLogin()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password">
             </div>
             <div class="form-group">
                 <button type="submit">Login</button>
             </div>
             <div class="form-group">
                 <label>Don't have an account yet? <a href="register.php">Register</a></label>
-                <!-- <button type="button" onclick="location.href='register.php'">Register</button> -->
             </div>
         </form>
     </div>

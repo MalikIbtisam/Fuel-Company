@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Quote History</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
 </head>
 
 <body class="history-body">
@@ -31,23 +31,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var dummyData = [
-                { date: '2024-01-01', gallons: 100, address: '123 Maple Street', deliveryDate: '2024-01-15', price: '$200.00', total: '$232.00' },
-            ];
-
-            var tbody = document.querySelector('#quoteHistoryTable tbody');
-            dummyData.forEach(function (entry) {
-                var tr = document.createElement('tr');
-                tr.innerHTML = '<td>' + entry.date + '</td>' +
-                    '<td>' + entry.gallons + '</td>' +
-                    '<td>' + entry.address + '</td>' +
-                    '<td>' + entry.deliveryDate + '</td>' +
-                    '<td>' + entry.price + '</td>' +
-                    '<td>' + entry.total + '</td>';
-                tbody.appendChild(tr);
-            });
+        var storedFuelQuotes = JSON.parse(localStorage.getItem('fuelQuotes')) || [];
+        var tbody = document.querySelector('#quoteHistoryTable tbody');
+        storedFuelQuotes.forEach(function (quote) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + new Date(quote.deliveryDate).toLocaleDateString() + '</td>' +
+                '<td>' + quote.gallonsRequested + '</td>' +
+                '<td>' + quote.deliveryAddress + '</td>' +
+                '<td>' + new Date(quote.deliveryDate).toLocaleDateString() + '</td>' +
+                '<td>' + quote.suggestedPrice + '</td>' +
+                '<td>' + quote.totalAmountDue + '</td>';
+            tbody.appendChild(tr);
         });
-    </script>
+    });
+</script>
 
 </body>
 </html>

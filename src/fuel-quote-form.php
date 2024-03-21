@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+    <script src="../assets/js/script.js"></script>
     <title>Fuel Quote Form</title>
 </head>
 
@@ -12,7 +13,7 @@
     <?php include 'header.php'; ?>  
     <div class="register-container">
         <h2>Fuel Quote Form</h2>
-        <form id="fuelQuoteForm" method="POST">
+        <form id="fuelQuoteForm" method="POST" onsubmit="return storeFuelQuote()">
             <div class="form-group">
                 <label for="gallonsRequested">Gallons Requested *</label>
                 <input type="number" id="gallonsRequested" name="gallonsRequested" required>
