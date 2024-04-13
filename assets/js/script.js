@@ -7,62 +7,36 @@ function validateLogin() {
 	var user = document.forms["loginForm"]["username"].value;
 	var pass = document.forms["loginForm"]["password"].value;
 	var errorMessage = document.getElementById("error-message");
-	var storedLogins = JSON.parse(localStorage.getItem('defaultLogins')) || [];
 
 	if (user.trim() === '' || pass.trim() === '') {
 		errorMessage.textContent = 'Please enter both username and password.';
 		return false;
-	} else {
-		var userExists = storedLogins.some(function (x) {
-            return x.username === user && x.password === pass;
-        });
-		if (userExists) {
-			return true;
-		} else {
-			errorMessage.textContent = 'Invalid username or password.';
-			return false;
-		}
 	}
+	return true;
 }
 
 function validateRegister() {
     var user = document.forms["registerForm"]["username"].value;
     var pass = document.forms["registerForm"]["password"].value;
     var errorMessage = document.getElementById("error-message");
-    var storedLogins = JSON.parse(localStorage.getItem('defaultLogins')) || [];
 
     if (user.trim() === '' || pass.trim() === '') {
         errorMessage.textContent = 'Please enter both username and password.';
         return false;
-    } else {
-        var userExists = storedLogins.some(function (entry) {
-            return entry.username === user;
-        });
-        if (userExists) {
-            errorMessage.textContent = 'User already exists.';
-            return false;
-        } else {
-            storedLogins.push({
-                username: user,
-                password: pass
-            });
-
-			localStorage.setItem('defaultLogins', JSON.stringify(storedLogins));
-            alert('Registration successful!');
-            return true;
-        }
-    }
+    } 
+	return true;
 }
 
 
 function validateProfile() {
 	let errors = [];
-	let fullName = document.forms["registrationForm"]["fullName"].value;
-	let address1 = document.forms["registrationForm"]["address1"].value;
-	let address2 = document.forms["registrationForm"]["address1"].value;
-	let city = document.forms["registrationForm"]["city"].value;
-	let state = document.forms["registrationForm"]["state"].value;
-	let zipCode = document.forms["registrationForm"]["zipCode"].value;
+	let fullName = document.forms["profileForm"]["fullName"].value;
+	let address1 = document.forms["profileForm"]["address1"].value;
+	let address2 = document.forms["profileForm"]["address2"].value;
+	let city = document.forms["profileForm"]["city"].value;
+	let state = document.forms["profileForm"]["state"].value;
+	let zipCode = document.forms["profileForm"]["zipCode"].value;
+	var errorMessage = document.getElementById("error-message");
 
 	if (fullName.length < 1 || fullName.length > 50) {
 		errors.push("Full Name must be between 1 and 50 characters.");
@@ -76,7 +50,7 @@ function validateProfile() {
 	if (city.length > 100) {
 		errors.push("City must be less than 100 characters.");
 	}
-	if (state.length < 1) {
+	if (!state) {
 		errors.push("State must be selected.");
 	}
 	if (zipCode.length < 5 || zipCode.length > 9) {
@@ -84,11 +58,16 @@ function validateProfile() {
 	}
 
 	if (errors.length > 0) {
-		alert(errors.join("\n"));
+		errorMessage.innerHTML = errors.join("<br>");
+		errorMessage.style.display = 'block';
 		return false;
+	} else {
+		errorMessage.innerHTML = '';
+		errorMessage.style.display = 'none';
 	}
 	return true;
 }
+
 
 function updateProfile() {
 	return true;
