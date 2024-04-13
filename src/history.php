@@ -1,3 +1,7 @@
+<?php 
+$fuelQuotes = [];
+include 'get_history.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +19,6 @@
         <table id="quoteHistoryTable">
             <thead>
                 <tr>
-                    <th>Date</th>
                     <th>Gallons Requested</th>
                     <th>Delivery Address</th>
                     <th>Delivery Date</th>
@@ -24,27 +27,17 @@
                 </tr>
             </thead>
             <tbody>
-
+                <?php foreach($fuelQuotes as $quote): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($quote['delivery_date']) ?></td>
+                        <td><?= htmlspecialchars($quote['gallons']) ?></td>
+                        <td><?= htmlspecialchars($quote['address']) ?></td>
+                        <td><?= htmlspecialchars($quote['price']) ?></td>
+                        <td><?= htmlspecialchars($quote['total']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        var storedFuelQuotes = JSON.parse(localStorage.getItem('fuelQuotes')) || [];
-        var tbody = document.querySelector('#quoteHistoryTable tbody');
-        storedFuelQuotes.forEach(function (quote) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + new Date(quote.deliveryDate).toLocaleDateString() + '</td>' +
-                '<td>' + quote.gallonsRequested + '</td>' +
-                '<td>' + quote.deliveryAddress + '</td>' +
-                '<td>' + new Date(quote.deliveryDate).toLocaleDateString() + '</td>' +
-                '<td>' + quote.suggestedPrice + '</td>' +
-                '<td>' + quote.totalAmountDue + '</td>';
-            tbody.appendChild(tr);
-        });
-    });
-</script>
-
 </body>
 </html>

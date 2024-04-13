@@ -1,3 +1,12 @@
+<?php
+@session_start();
+$formDisabled = '';
+$errorMsg = '';
+if (!isset($_SESSION['username'])) {
+    $errorMsg = "Not logged in.";
+    $formDisabled = 'disabled';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +22,8 @@
     <?php include 'header.php'; ?>  
     <div class="register-container">
         <h2>Fuel Quote Form</h2>
-        <form id="fuelQuoteForm" method="POST" onsubmit="return storeFuelQuote()">
+        <div id="error-message" class="error"></div>
+        <form id="fuelQuoteForm" method="POST" action="insert_quote.php">
             <div class="form-group">
                 <label for="gallonsRequested">Gallons Requested *</label>
                 <input type="number" id="gallonsRequested" name="gallonsRequested" required>
@@ -35,7 +45,7 @@
                 <input type="currency" id="totalAmountDue" name="totalAmountDue" readonly>
             </div>
             <div class="form-group">
-                <button type="submit">Get Quote</button>
+                <button type="submit" value="Get Quote" name="GetQuote" <?php echo $formDisabled; ?>>Get Quote</button>
             </div>
             <div class="form-group">
                 <button type="button" onclick="location.href='history.php'">Check History</button>

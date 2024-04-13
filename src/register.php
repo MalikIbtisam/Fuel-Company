@@ -14,7 +14,17 @@
     <div class="login-container">
         <h2>Client Registration</h2>
         <div id="error-message" class="error"></div>
-        <form id="registerForm" method="POST" action="profile.php" onsubmit="return validateRegister()">
+        <?php
+            if (isset($_GET['error']) && $_GET['error'] === 'username_not_available') {
+                echo '<script type="text/javascript">',
+                    'document.addEventListener("DOMContentLoaded", function() {',
+                    'var errorMessage = document.getElementById("error-message");',
+                    'errorMessage.textContent = "User already exists.";',
+                    '});',
+                    '</script>';
+            }
+        ?>
+        <form id="registerForm" method="POST" action="handle_register.php" onsubmit="return validateRegister()">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>

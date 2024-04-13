@@ -14,7 +14,17 @@
     <div class="login-container">
         <h2>Login</h2>
         <div id="error-message" class="error"></div>
-        <form id="loginForm" method="POST" action="fuel-quote-form.php" onsubmit="return validateLogin()">
+        <?php
+            if (isset($_GET['error']) && $_GET['error'] === 'invalid_credentials') {
+                echo '<script type="text/javascript">',
+                    'document.addEventListener("DOMContentLoaded", function() {',
+                    'var errorMessage = document.getElementById("error-message");',
+                    'errorMessage.textContent = "Invalid username or password.";',
+                    '});',
+                    '</script>';
+            }
+        ?>
+        <form id="loginForm" method="POST" action="handle_login.php" onsubmit="return validateLogin()">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
